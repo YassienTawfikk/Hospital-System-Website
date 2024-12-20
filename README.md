@@ -79,7 +79,6 @@ Here is a brief overview of the database tables used in this project:
 - **appointments**: Tracks appointments and their status.
 - **prescriptions**: Records prescription details provided by doctors.
 
-*You can optionally include a diagram of the database schema.*
 
 ---
 
@@ -87,38 +86,20 @@ Here is a brief overview of the database tables used in this project:
 
 A huge shoutout to the entire **development team** who worked tirelessly to bring this project to life:
 
-- **Nancy Mahmoud**
-- **Madonna Mosaad**
-- **Mazen Marwan**
-- **Omar Khaled**
+- [Yassien Tawfik](https://github.com/YassienTawfikk)
+- [Mazen Marwan](https://github.com/Mazenmarwan023)
+- [Nancy Mahmoud](https://github.com/nancymahmoud1)
+- [Madonna Mosaad](https://github.com/madonna-mosaad)
 - **Youssef Mohamed**
 
 Thank you for your expertise and collaboration! 
 
 ---
 
-## Screenshots
-
-### 1. **Homepage**
-![Homepage](https://github.com/user-attachments/assets/f553306f-9d4b-42fb-b26d-614122e76fb9)
-![Dark Mode](https://github.com/user-attachments/assets/edeb03bb-6fe0-4196-81a0-a5c4a7d40830)
-
-### 2. **Doctor Profiles**
-![Doctor Profiles](https://github.com/user-attachments/assets/c3a1a1a3-6fb9-4060-a294-c1f1ea6dacc3)
-
-### 3. **Patient Profiles and Appointments**
-![Patient Profiles](https://github.com/user-attachments/assets/9710cbb9-69c6-4947-bf8d-eedb3e75aa32)
-![Appointments](https://github.com/user-attachments/assets/871ae6dd-27e0-45d9-b162-3d46929b3baf)
-
-
-### 4. **Prescription Management**
-![Prescription Management](https://github.com/user-attachments/assets/08093038-a92b-4276-8880-908e32884853)
-
----
-
 ## Video Demonstration
 
-A full video walkthrough of the system is available for you to explore all features. You can watch it here: [Hospital System Video](#).
+A full video walkthrough of the system is available for you to explore all features.
+<video src="https://github.com/user-attachments/assets/482d3c58-1b43-4893-b731-8c3f08c38bc4" controls="controls" style="max-width: 100%;"></video>
 
 ---
 
