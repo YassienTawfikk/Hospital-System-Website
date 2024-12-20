@@ -99,9 +99,10 @@ Thank you for your expertise and collaboration!
 
 ## Screenshots
 
-### 1. **Homepage with Dark Mode**
-![Homepage](https://github.com/user-attachments/assets/02be3d0f-5ff7-44b7-86ab-cb1639ae2f6b)
-![DarkMode](https://github.com/user-attachments/assets/dfc57138-1e24-4fdd-b52b-0c02ef3075ad)
+### 1. **Homepage**
+![Homepage](https://github.com/user-attachments/assets/f553306f-9d4b-42fb-b26d-614122e76fb9)
+![Dark Mode](https://github.com/user-attachments/assets/edeb03bb-6fe0-4196-81a0-a5c4a7d40830)
+
 ### 2. **Doctor Profiles**
 ![Doctor Profiles](https://github.com/user-attachments/assets/c3a1a1a3-6fb9-4060-a294-c1f1ea6dacc3)
 
