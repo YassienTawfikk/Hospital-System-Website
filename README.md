@@ -2,9 +2,9 @@
 
 ## Welcome to the Hospital Management System
 
-This is a comprehensive **hospital management system** built to streamline healthcare operations. The platform features a user-friendly interface with a secure backend that enables patients, doctors, and administrators to interact seamlessly.
----
+This is a comprehensive **Hospital Management System** built to streamline healthcare operations. The platform features a user-friendly interface with a secure backend that enables patients, doctors, and administrators to interact seamlessly.
 
+---
 ## Video Demonstration
 
 A full video walkthrough of the system is available for you to explore all features.
