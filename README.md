@@ -3,6 +3,13 @@
 ## Welcome to the Hospital Management System
 
 This is a comprehensive **hospital management system** built to streamline healthcare operations. The platform features a user-friendly interface with a secure backend that enables patients, doctors, and administrators to interact seamlessly.
+---
+
+## Video Demonstration
+
+A full video walkthrough of the system is available for you to explore all features.
+<video src="https://github.com/user-attachments/assets/482d3c58-1b43-4893-b731-8c3f08c38bc4" controls="controls" style="max-width: 100%;"></video>
+
 
 ---
 
@@ -93,13 +100,6 @@ A huge shoutout to the entire **development team** who worked tirelessly to brin
 - **Youssef Mohamed**
 
 Thank you for your expertise and collaboration! 
-
----
-
-## Video Demonstration
-
-A full video walkthrough of the system is available for you to explore all features.
-<video src="https://github.com/user-attachments/assets/482d3c58-1b43-4893-b731-8c3f08c38bc4" controls="controls" style="max-width: 100%;"></video>
 
 ---
 
