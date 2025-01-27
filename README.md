@@ -89,24 +89,44 @@ Here is a brief overview of the database tables used in this project:
 
 ---
 
-## Team Shoutout
-
-A huge shoutout to the entire **development team** who worked tirelessly to bring this project to life:
-
-- [Yassien Tawfik](https://github.com/YassienTawfikk)
-- [Mazen Marwan](https://github.com/Mazenmarwan023)
-- [Nancy Mahmoud](https://github.com/nancymahmoud1)
-- [Madonna Mosaad](https://github.com/madonna-mosaad)
-- **Youssef Mohamed**
-
-Thank you for your expertise and collaboration! 
-
----
-
-## Contact
-
-For any questions or suggestions, feel free to reach out:
-
-- **Name**: Yassien Tawfik
-- **Email**: Yassien.m.m.tawfik@gmail.com
-- **GitHub**: [YassienTawfikk](https://github.com/YassienTawfikk)
+## Contributors
+<table align="center">
+  <tr>
+        <td align="center">
+      <a href="https://github.com/YassienTawfikk" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/126521373?v=4" width="150px;" alt="Yassien Tawfik"/>
+        <br />
+        <sub><b>Yassien Tawfik</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/madonna-mosaad" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/127048836?v=4" width="150px;" alt="Madonna Mosaad"/>
+        <br />
+        <sub><b>Madonna Mosaad</b></sub>
+      </a>
+    </td>
+        <td align="center">
+      <a href="https://github.com/nancymahmoud1" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/125357872?v=4" width="150px;" alt="Nancy Mahmoud"/>
+        <br />
+        <sub><b>Nancy Mahmoud</b></sub>
+      </a>
+    </td>
+      <td align="center">
+        <a href="https://github.com/Mazenmarwan023" target="_blank">
+          <img src="https://avatars.githubusercontent.com/u/127551364?v=4" width="150px;" alt="Mazen Marwan"/>
+          <br />
+          <sub><b>Mazen Marwan</b></sub>
+        </a>
+      </td>
+    </td>
+        <td align="center">
+      <a href="https://github.com/yousseftaha167" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/128304243?v=4" width="150px;" alt="Youssef Taha"/>
+        <br />
+        <sub><b>Youssef Taha</b></sub>
+      </a>
+    </td>    
+  </tr>
+</table>
