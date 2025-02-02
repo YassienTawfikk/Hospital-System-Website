@@ -5,6 +5,27 @@
 This is a comprehensive **Hospital Management System** built to streamline healthcare operations. The platform features a user-friendly interface with a secure backend that enables patients, doctors, and administrators to interact seamlessly.
 
 ---
+## 🌐 Live Demo
+[Hospital System](https://hospital-system-website-production.up.railway.app)
+
+### Test Credentials
+
+You can use the following test accounts to explore different user roles:
+
+#### **Doctor Login**
+- **Email**: `Doctor01@gmail.com`
+- **Password**: `Doctor01`
+
+#### **Nurse Login**
+- **Email**: `Nurse01@gmail.com`
+- **Password**: `Nurse01`
+
+#### **Patient Login**
+- **Email**: `Patient01@gmail.com`
+- **Password**: `Patient01`
+
+
+---
 ## Video Demonstration
 
 A full video walkthrough of the system is available for you to explore all features.
