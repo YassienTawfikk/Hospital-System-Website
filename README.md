@@ -12,20 +12,44 @@ This is a comprehensive **Hospital Management System** built to streamline healt
 
 You can use the following test accounts to explore different user roles:
 
-#### **Doctor Login**
-- **Email**: `Doctor01@gmail.com`
-- **Password**: `Doctor01`
+#### **Doctor Logins**
+| Email                 | Password  |
+|----------------------|------------|
+| `Doctor01@gmail.com` | `Doctor01` |
+| `Doctor02@gmail.com` | `Doctor02` |
+| `Doctor03@gmail.com` | `Doctor03` |
+| `Doctor04@gmail.com` | `Doctor04` |
+| `Doctor05@gmail.com` | `Doctor05` |
+| `Doctor06@gmail.com` | `Doctor06` |
+| `Doctor07@gmail.com` | `Doctor07` |
+| `Doctor08@gmail.com` | `Doctor08` |
 
-#### **Nurse Login**
-- **Email**: `Nurse01@gmail.com`
-- **Password**: `Nurse01`
+#### **Nurse Logins**
+| Email                 | Password  |
+|----------------------|------------|
+| `Nurse01@gmail.com`  | `Nurse01`  |
+| `Nurse02@gmail.com`  | `Nurse02`  |
+| `Nurse03@gmail.com`  | `Nurse03`  |
+| `Nurse04@gmail.com`  | `Nurse04`  |
+| `Nurse05@gmail.com`  | `Nurse05`  |
+| `Nurse06@gmail.com`  | `Nurse06`  |
+| `Nurse07@gmail.com`  | `Nurse07`  |
+| `Nurse08@gmail.com`  | `Nurse08`  |
 
-#### **Patient Login**
-- **Email**: `Patient01@gmail.com`
-- **Password**: `Patient01`
-
+#### **Patient Logins**
+| Email                 | Password  |
+|----------------------|------------|
+| `Patient01@gmail.com` | `Patient01` |
+| `Patient02@gmail.com` | `Patient02` |
+| `Patient03@gmail.com` | `Patient03` |
+| `Patient04@gmail.com` | `Patient04` |
+| `Patient05@gmail.com` | `Patient05` |
+| `Patient06@gmail.com` | `Patient06` |
+| `Patient07@gmail.com` | `Patient07` |
+| `Patient08@gmail.com` | `Patient08` |
 
 ---
+
 ## Video Demonstration
 
 A full video walkthrough of the system is available for you to explore all features.
