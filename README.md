@@ -6,7 +6,7 @@ This is a comprehensive **Hospital Management System** built to streamline healt
 
 ---
 ## 🌐 Live Demo
-<a href="hospital-system-website-82f2z3nob-yassientawfikks-projects.vercel.app/" target="_blank" rel="noopener noreferrer">Hospital System</a>
+<a href="https://hospital-system-website-82f2z3nob-yassientawfikks-projects.vercel.app/login/" target="_blank" rel="noopener noreferrer">Hospital System</a>
 > Loading may take a few seconds
 
 ### Test Credentials
