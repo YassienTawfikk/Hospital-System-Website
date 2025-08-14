@@ -106,7 +106,7 @@ To set up and run this project on your local machine, follow these steps:
 
 4. **Run the Application**:
    ```bash
-   app.py run
+   index.py run
    ```
    - Open your browser and go to `http://127.0.0.1:5000`.
 

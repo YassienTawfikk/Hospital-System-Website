@@ -2,11 +2,19 @@ import datetime
 import os
 from flask import Flask, jsonify, render_template, redirect, session, request, flash, url_for
 from werkzeug.utils import secure_filename
-from main import cursor, database_session
+from main import get_db
 
-app = Flask(__name__)
+database_session, cursor = get_db()
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+app = Flask(
+    __name__,
+    static_folder=os.path.join(base_dir, "../static"),
+    template_folder=os.path.join(base_dir, "../templates")
+)
 app.secret_key = 'yassien'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
+
 
 @app.template_filter('enumerate')
 def jinja2_enumerate(iterable):
@@ -68,11 +76,15 @@ def index():
         elif data['job'] == 'doctor':
             cursor.execute(
                 '''
-                SELECT a.id, p.fname, p.lname, a.appointment_date, a.appointment_time,
-                (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < NOW() THEN 1 ELSE 0 END) AS is_past,
-                (CASE WHEN a.appointment_date = CURRENT_DATE THEN 1 ELSE 0 END) AS is_today
+                SELECT a.id,
+                       p.fname,
+                       p.lname,
+                       a.appointment_date,
+                       a.appointment_time,
+                       (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < NOW() THEN 1 ELSE 0 END) AS is_past,
+                       (CASE WHEN a.appointment_date = CURRENT_DATE THEN 1 ELSE 0 END)                                      AS is_today
                 FROM appointments a
-                JOIN patient p ON a.p_id = p.p_id
+                         JOIN patient p ON a.p_id = p.p_id
                 WHERE a.doc_id = %s
                 ORDER BY is_past, a.appointment_date, a.appointment_time
                 ''',
@@ -82,11 +94,15 @@ def index():
         elif data['job'] == 'patient':
             cursor.execute(
                 '''
-                SELECT a.id, dr.fname, dr.lname, a.appointment_date, a.appointment_time,
-                (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < NOW() THEN 1 ELSE 0 END) AS is_past,
-                (CASE WHEN a.appointment_date = CURRENT_DATE THEN 1 ELSE 0 END) AS is_today
+                SELECT a.id,
+                       dr.fname,
+                       dr.lname,
+                       a.appointment_date,
+                       a.appointment_time,
+                       (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < NOW() THEN 1 ELSE 0 END) AS is_past,
+                       (CASE WHEN a.appointment_date = CURRENT_DATE THEN 1 ELSE 0 END)                                      AS is_today
                 FROM appointments a
-                JOIN doctor dr ON a.doc_id = dr.doc_id
+                         JOIN doctor dr ON a.doc_id = dr.doc_id
                 WHERE a.p_id = %s
                 ORDER BY is_past, a.appointment_date, a.appointment_time
                 ''',
@@ -132,7 +148,9 @@ def index():
 
     # Fetch the list of reviews from the database
     try:
-        cursor.execute('SELECT r.rating, r.review, p.fname, p.lname FROM reviews r JOIN patient p ON r.p_id = p.p_id WHERE r.doc_id = %s', (data['doc_id'],))
+        cursor.execute(
+            'SELECT r.rating, r.review, p.fname, p.lname FROM reviews r JOIN patient p ON r.p_id = p.p_id WHERE r.doc_id = %s',
+            (data['doc_id'],))
         reviews = cursor.fetchall()
     except Exception as e:
         reviews = []
@@ -140,20 +158,22 @@ def index():
     # Fetch the average rating for each doctor
     try:
         cursor.execute('''
-            SELECT d.doc_id, AVG(r.rating) AS avg_rating 
-            FROM doctor d 
-            LEFT JOIN reviews r ON d.doc_id = r.doc_id 
-            GROUP BY d.doc_id
-        ''')
+                       SELECT d.doc_id, AVG(r.rating) AS avg_rating
+                       FROM doctor d
+                                LEFT JOIN reviews r ON d.doc_id = r.doc_id
+                       GROUP BY d.doc_id
+                       ''')
         doctor_ratings = {row[0]: row[1] for row in cursor.fetchall()}
     except Exception as e:
         doctor_ratings = {}
 
     return render_template("home.html", data=data, doctors=doctors, is_patient=is_patient, is_doctor=is_doctor,
-                            is_nurse=is_nurse, doc_ids=list(unique_doctors.keys()), doc_names=list(unique_doctors.values()), 
-                            unique_doctors=unique_doctors, patient_ids=patient_ids, patient_names=patient_names, 
-                            appointments=appointments, prescriptions=prescriptions, nurse_ids=nurse_ids, 
-                            nurse_names=nurse_names, reviews=reviews, doctor_ratings=doctor_ratings)
+                           is_nurse=is_nurse, doc_ids=list(unique_doctors.keys()),
+                           doc_names=list(unique_doctors.values()),
+                           unique_doctors=unique_doctors, patient_ids=patient_ids, patient_names=patient_names,
+                           appointments=appointments, prescriptions=prescriptions, nurse_ids=nurse_ids,
+                           nurse_names=nurse_names, reviews=reviews, doctor_ratings=doctor_ratings)
+
 
 @app.route('/profile')
 def profile():
@@ -176,20 +196,28 @@ def profile():
     if is_doctor:
         cursor.execute(
             '''
-            SELECT a.id, p.fname, p.lname, a.appointment_date, a.appointment_time,
-            (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < %s THEN 1 ELSE 0 END) AS is_past,
-            (CASE WHEN a.appointment_date = %s THEN 1 ELSE 0 END) AS is_today
+            SELECT a.id,
+                   p.fname,
+                   p.lname,
+                   a.appointment_date,
+                   a.appointment_time,
+                   (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < %s THEN 1 ELSE 0 END) AS is_past,
+                   (CASE WHEN a.appointment_date = %s THEN 1 ELSE 0 END)                                             AS is_today
             FROM appointments a
-            JOIN patient p ON a.p_id = p.p_id
+                     JOIN patient p ON a.p_id = p.p_id
             WHERE a.doc_id = %s
             ORDER BY is_past, a.appointment_date, a.appointment_time
             ''',
             (now, today_date, data['doc_id'])
         )
         appointments = cursor.fetchall()
-        cursor.execute('SELECT p.fname, p.lname, r.rating, r.review FROM reviews r JOIN patient p ON r.p_id = p.p_id WHERE r.doc_id = %s', (data['doc_id'],))
+        cursor.execute(
+            'SELECT p.fname, p.lname, r.rating, r.review FROM reviews r JOIN patient p ON r.p_id = p.p_id WHERE r.doc_id = %s',
+            (data['doc_id'],))
         reviews = cursor.fetchall()
-        cursor.execute('SELECT d.doc_id, AVG(r.rating) AS avg_rating FROM doctor d LEFT JOIN reviews r ON d.doc_id = r.doc_id WHERE d.doc_id = %s GROUP BY d.doc_id', (data['doc_id'],))
+        cursor.execute(
+            'SELECT d.doc_id, AVG(r.rating) AS avg_rating FROM doctor d LEFT JOIN reviews r ON d.doc_id = r.doc_id WHERE d.doc_id = %s GROUP BY d.doc_id',
+            (data['doc_id'],))
         doctor_ratings = {row[0]: row[1] for row in cursor.fetchall()}
     elif is_nurse:
         cursor.execute(
@@ -199,11 +227,15 @@ def profile():
     else:
         cursor.execute(
             '''
-            SELECT a.id, dr.fname, dr.lname, a.appointment_date, a.appointment_time,
-            (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < %s THEN 1 ELSE 0 END) AS is_past,
-            (CASE WHEN a.appointment_date = %s THEN 1 ELSE 0 END) AS is_today
+            SELECT a.id,
+                   dr.fname,
+                   dr.lname,
+                   a.appointment_date,
+                   a.appointment_time,
+                   (CASE WHEN (a.appointment_date + a.appointment_time::interval)::timestamp < %s THEN 1 ELSE 0 END) AS is_past,
+                   (CASE WHEN a.appointment_date = %s THEN 1 ELSE 0 END)                                             AS is_today
             FROM appointments a
-            JOIN doctor dr ON a.doc_id = dr.doc_id
+                     JOIN doctor dr ON a.doc_id = dr.doc_id
             WHERE a.p_id = %s
             ORDER BY is_past, a.appointment_date, a.appointment_time
             ''',
@@ -219,7 +251,7 @@ def profile():
                 'SELECT d.doc_id, d.fname, d.lname FROM doctor d JOIN appointments a ON d.doc_id = a.doc_id WHERE a.p_id = %s',
                 (data['p_id'],))
             doctor_info = cursor.fetchall()
-            
+
             # Use a set to ensure uniqueness
             unique_doctors = set((row[0], f"{row[1]} {row[2]}") for row in doctor_info)
             doc_ids, doc_names = zip(*unique_doctors) if unique_doctors else ([], [])
@@ -231,7 +263,9 @@ def profile():
         doc_names = []
 
     return render_template("profile.html", data=data, appointments=appointments, prescriptions=prescriptions,
-                            is_doctor=is_doctor, is_patient=is_patient, is_nurse=is_nurse, reviews=reviews, doctor_ratings=doctor_ratings, doc_ids=doc_ids, doc_names=doc_names)
+                           is_doctor=is_doctor, is_patient=is_patient, is_nurse=is_nurse, reviews=reviews,
+                           doctor_ratings=doctor_ratings, doc_ids=doc_ids, doc_names=doc_names)
+
 
 @app.route('/edit', methods=['POST'])
 def edit():
@@ -277,19 +311,19 @@ def update():
                 cursor.execute(
                     'UPDATE doctor SET fname=%s, lname=%s, email=%s, phonenumber=%s, address=%s, brief=%s, photo=%s WHERE email=%s',
                     (updated_firstname, updated_lastname, updated_email, updated_phone, updated_address, updated_brief,
-                        photo_url, data['email'])
+                     photo_url, data['email'])
                 )
             elif updated_job == 'nurse':
                 cursor.execute(
                     'UPDATE nurse SET fname=%s, lname=%s, email=%s, phonenumber=%s, address=%s, photo=%s WHERE email=%s',
                     (updated_firstname, updated_lastname, updated_email, updated_phone, updated_address, photo_url,
-                        data['email'])
+                     data['email'])
                 )
             else:
                 cursor.execute(
                     'UPDATE patient SET fname=%s, lname=%s, email=%s, phonenumber=%s, address=%s, photo=%s WHERE email=%s',
                     (updated_firstname, updated_lastname, updated_email, updated_phone, updated_address, photo_url,
-                        data['email'])
+                     data['email'])
                 )
             database_session.commit()
 
@@ -347,7 +381,9 @@ def register():
             photo_url = default_photo_url
 
         # Check if email already exists in doctor, nurse, or patient tables
-        cursor.execute('SELECT email FROM doctor WHERE email = %s UNION SELECT email FROM nurse WHERE email = %s UNION SELECT email FROM patient WHERE email = %s', (email, email, email))
+        cursor.execute(
+            'SELECT email FROM doctor WHERE email = %s UNION SELECT email FROM nurse WHERE email = %s UNION SELECT email FROM patient WHERE email = %s',
+            (email, email, email))
         email_database = cursor.fetchone()
         if email_database:
             message = 'Account already exists with this email!'
@@ -480,7 +516,7 @@ def reviews():
         doc_id = request.form.get('doc_id')
         rating = request.form.get('rating')
         review = request.form.get('review')
-        
+
         try:
             # Fetch doctor name
             cursor.execute('SELECT fname, lname FROM doctor WHERE doc_id = %s', (doc_id,))
@@ -552,14 +588,11 @@ def get_available_times():
         return jsonify({'error': str(e)}), 500
 
 
-
 @app.route('/logout')
 def logout():
     session.pop('data', None)
     return redirect(url_for('login'))
 
 
-if __name__ == '__main__':
-    # Initialize the database by executing the SQL script
-    execute_sql_file('SQLQuery1.sql')
+if __name__ == "__main__":
     app.run(debug=True)
