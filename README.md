@@ -4,7 +4,7 @@
 
 This is a comprehensive **Hospital Management System** built to streamline healthcare operations. The platform features a user-friendly interface with a secure backend that enables patients, doctors, and administrators to interact seamlessly.
 
-![App Design Overview](https://github.com/user-attachments/assets/ba9b235e-f290-44d2-b7f2-991979275bc8)
+![App Design Overview](https://github.com/user-attachments/assets/ec3fe0cb-3aeb-422e-b3bc-3cca729da6f2)
 
 ---
 ## 🌐 Live Demo
