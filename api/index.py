@@ -1,5 +1,10 @@
 import datetime
 import os
+import sys
+
+# Add project root to sys.path to allow importing main.py from parent directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from flask import Flask, jsonify, render_template, redirect, session, request, flash, url_for
 from werkzeug.utils import secure_filename
 from main import get_db
@@ -418,10 +423,47 @@ def register():
 @app.route('/login', methods=["GET", "POST"])
 def login():
     message = None
+
+    # CHECK 1: Handle Auto-Login via URL parameters (GET request)
+    # This allows links like /login?email=...&password=...&job=... to work
+    if request.method == "GET":
+        email = request.args.get('email')
+        password = request.args.get('password')
+        job = request.args.get('job')
+
+        # If all parameters are present in the URL, try to log in
+        if email and password and job:
+            job = job.lower()  # Ensure 'Doctor' becomes 'doctor' to match your DB logic
+            user = None
+            
+            # Reuse your existing logic to find the user
+            if job == 'doctor':
+                cursor.execute('SELECT * from doctor where email = %s and password = %s', (email, password))
+                user = cursor.fetchone()
+            elif job == 'nurse':
+                cursor.execute('SELECT * from nurse where email = %s and password = %s', (email, password))
+                user = cursor.fetchone()
+            elif job == 'patient':
+                cursor.execute('SELECT * from patient where email = %s and password = %s', (email, password))
+                user = cursor.fetchone()
+
+            if user:
+                session['data'] = dict(user)
+                return redirect(url_for('index'))
+            else:
+                message = 'Invalid auto-login credentials.'
+
+    # CHECK 2: Handle standard Login form submission (POST request)
     if request.method == "POST":
         job = request.form.get('job')
         email = request.form.get('email')
         password = request.form.get('password')
+        
+        # Ensure job is lowercase for consistency
+        if job: 
+            job = job.lower()
+
+        user = None
         if job == 'doctor':
             cursor.execute('SELECT * from doctor where email = %s and password = %s', (email, password))
             user = cursor.fetchone()
@@ -431,11 +473,13 @@ def login():
         else:
             cursor.execute('SELECT * from patient where email = %s and password = %s', (email, password))
             user = cursor.fetchone()
+            
         if user is None:
             message = 'Invalid email or password.'
         else:
             session['data'] = dict(user)
             return redirect(url_for('index'))
+
     return render_template('login.html', message=message)
 
 

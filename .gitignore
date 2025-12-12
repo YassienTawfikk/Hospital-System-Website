@@ -1,6 +1,10 @@
 /__pycache__/
 /.idea/
 /.ipynb_checkpoints/
+*.pyc
+/venv/
+/.venv/
+/static/uploads/
 
 .DS_Store
 .env

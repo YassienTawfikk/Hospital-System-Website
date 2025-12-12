@@ -1,0 +1,196 @@
+/* Mobile Responsiveness for Hospital System Website */
+@media screen and (max-width: 768px) {
+
+    /* Global Adjustments */
+    body {
+        overflow-x: hidden;
+        font-size: 16px;
+        /* Base font size boost for readability */
+    }
+
+    .main-container {
+        width: 100%;
+        padding: 0 5%;
+        /* Increased side padding */
+    }
+
+    /* Header Adjustments */
+    .header-two {
+        height: auto;
+        padding: 10px 0;
+    }
+
+    .header-two>.main-container {
+        flex-direction: column;
+        height: auto;
+        gap: 15px;
+    }
+
+    .go-to-options {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-right: 0;
+        gap: 10px;
+    }
+
+    .go-to-options>span {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        margin: 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header-two>.main-container>.image::after {
+        display: none;
+        /* Hide hover tooltip on mobile */
+    }
+
+    /* Home Page: Landing Section */
+    #Home {
+        height: auto;
+        min-height: 80vh;
+        /* Reduced from 100vh to avoid scrolling on small content */
+        padding-top: 20px;
+    }
+
+    #Home>.main-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .landing-text {
+        width: 100%;
+        bottom: 0;
+        padding: 20px 0;
+    }
+
+    .landing-text h1 {
+        font-size: 1.5rem;
+        /* Reduced font size */
+    }
+
+    .landing-text h4 {
+        font-size: 1rem;
+    }
+
+    .landing-image {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .landing-image>.image {
+        width: 80%;
+        max-width: 250px;
+        /* Reduced max width */
+    }
+
+    /* Home Page: Doctors */
+    .doctors-box {
+        width: 95%;
+        /* Responsive width */
+        margin: 15px auto;
+        /* Centered with vertical spacing */
+        padding: 10px;
+        /* Reduced padding */
+    }
+
+    .doctors-box h3 {
+        font-size: 1.1rem;
+        /* Compact header */
+        padding-bottom: 5px;
+    }
+
+    /* Home Page: Services */
+    .services {
+        margin-top: 30px;
+    }
+
+    .srv-holder {
+        grid-template-columns: 1fr;
+        width: 100%;
+        padding: 0;
+        gap: 20px;
+    }
+
+    .srv-card {
+        width: 95%;
+        max-width: 100%;
+        /* Allow it to fill the 95% width */
+        margin: 0 auto;
+        height: auto;
+        /* Allow auto height */
+    }
+
+    .srv-box {
+        height: auto;
+        /* Auto height to fit content */
+        padding-bottom: 20px;
+    }
+
+    .srv-box>i {
+        padding: 30px 0 10px;
+        /* Reduced top padding */
+        font-size: 50px;
+        /* Smaller icon */
+    }
+
+    /* Profile Page Layout */
+    .profile_page {
+        flex-direction: column;
+        height: auto;
+        width: 100%;
+        padding: 0;
+    }
+
+    #profile-column {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .right-column {
+        width: 100%;
+        right: 0;
+    }
+
+    .user-info,
+    .social-links,
+    .user-details,
+    .activity-box {
+        width: 95%;
+        margin: 0 auto;
+        margin-bottom: 15px;
+        /* Add spacing between stuck boxes */
+    }
+
+    .user-info {
+        height: auto;
+        padding: 20px 0;
+    }
+
+    /* Adjust Tables */
+    .page-table th,
+    .page-table td {
+        padding: 8px 4px;
+        font-size: 12px;
+        /* Smaller font for tables */
+        word-wrap: break-word;
+    }
+
+    .profile-header {
+        flex-direction: row;
+        align-items: center;
+        font-size: 14px;
+        padding: 10px 5%;
+    }
+
+    /* Modal Adjustments */
+    .modal-content {
+        width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+}
